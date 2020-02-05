@@ -1,0 +1,41 @@
+1.配置html-webpack-plugin
+    const path =require('path')
+    const HtmlWebPackPlugin=require('html-webpack-plugin') //导入在内存中自动生成index页面插件
+
+    //创建一个插件的实例对象
+    const htmlPlugin =new HtmlWebPackPlugin({
+            template:path.join(__dirname,'./src/index.html'),//源文件
+            filename:'index.html'//生成的内存中首页的名称
+    })
+    //向外暴露一个打包的配置对象
+    module.exports={
+        mode:'development',
+        plugins:[
+            htmlPlugin
+        ]
+    }    
+2.安装react
+    2.1cnpm i react react-dom -S
+    2.2使用react
+        import React from 'react'
+        import ReactDOM from 'react-dom'
+
+        const myh1=React.createElement('h1',{id:'myh1','title':'this is a h1'},'这是一个大的h1')
+        const div=React.createElement('div',null,'this is a div',myh1)
+        ReactDOM.render(div,document.getElementById('app'))
+    2.3启用JSX
+       2.3.1安装babel
+            a.
+                cnpm i babel-core babel-loader babel-plugin-transform-runtime -D
+                cnpm i babel-preset-env babel-preset-stage-0 babel-preset-react -D
+            b.baberlrc
+                {
+                    "presets": ["env","stage-0","react"],
+                    "plugins": ["transform-runtime"]
+                }
+            c.module:{
+                    rules:[
+                        { test: /\.js|jsx$/,use:'babel-loader',exclude: /node_modules/}
+                    ]
+                }
+                
